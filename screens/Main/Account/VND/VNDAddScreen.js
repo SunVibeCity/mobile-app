@@ -27,13 +27,16 @@ export default class VNDAddScreen extends React.Component {
     const totalAmount = Number(item.amount) + Number(this.state.amount);
     accountRef.child(item.kind).child(item.name).set(totalAmount)
       .then((result) => {
-        const acivityRef = firebase.database().ref('activity/' + user.uid);
-        acivityRef.push({
+        // const activityRef = firebase.database().ref('activity/' + user.uid);
+        const activityRef = firebase.database().ref('/queue');
+        activityRef.push({
+          user: user.uid,
           kind: item.kind,
-          symbol: item.name,
+          currency: item.name,
           action: 'add',
-          amount: this.state.amount,
-          created: Date.now()
+          amount: Number(this.state.amount),
+          status: 'pending',
+          created: Date.now(),
         });
         this.setState({loading:false});
         this.props.navigation.navigate('Unauth'); // force navigation route clean up. a bit hack.

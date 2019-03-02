@@ -20,10 +20,10 @@ export default class HomeScreen extends React.Component {
 
   componentWillUnmount() {
     // console.log('Unauth componentWillUnmount');
-    this.authFirebaseListener && this.authFirebaseListener() // Unlisten it by calling it as a function
+    // this.authFirebaseListener && this.authFirebaseListener() // Unlisten it by calling it as a function
   }
 
-  onAuthStateChanged = user => {
+  onAuthStateChanged = (user) => {
     // console.log('Unauth onAuthStateChanged');
     if (user !== null) {
       // console.log('Unauth navigate to main');
