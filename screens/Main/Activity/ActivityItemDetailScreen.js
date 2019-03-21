@@ -12,14 +12,32 @@ export default class ActivityItemDetailScreens extends React.Component {
     },
   };
 
+
   render() {
+
+    const item = this.props.navigation.state.params.item;
+
+
+    const items = [];
+
+    for (let key in item) {
+      if (key === 'key') continue;
+      items.push(
+        <Text key={key}>
+          {key}: {item[key]}
+        </Text>
+      );
+    }
+
+
     return (
       <ScrollView style={styles.container}>
         {/* this screens is not implemented. it works only as template */}
         <View>
-          <Text>
-            {JSON.stringify(this.props)}*/}
-          </Text>
+          {/*<Text>*/}
+            {/*{JSON.stringify(item)}*!/*/}
+          {/*</Text>*/}
+          {items}
         </View>
       </ScrollView>
     );

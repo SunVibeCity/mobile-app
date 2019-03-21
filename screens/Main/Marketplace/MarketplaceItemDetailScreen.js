@@ -40,10 +40,10 @@ export default class MarketplaceItemDetailScreens extends React.Component {
       user: user.uid,
       kind: 'book',
       symbol: item.symbol,
-      action: 'fok' + this.state.name,
+      action: 'fok' + (this.state.name === 'Ask' ? 'Bid' : 'Ask'),
       price: Number(this.state.price),
       amount: Number(this.state.amount),
-      currency: item.name,
+      currency: item.currency,
       status: 'pending',
       created: Date.now(),
     }).then((result) => {
@@ -85,9 +85,9 @@ export default class MarketplaceItemDetailScreens extends React.Component {
           {formFooter}
         </Card>
         <View>
-          <Text>
-            {JSON.stringify(this.props)}}
-          </Text>
+          {/*<Text>*/}
+            {/*{JSON.stringify(this.props)}}*/}
+          {/*</Text>*/}
         </View>
       </ScrollView>
     );

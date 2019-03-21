@@ -87,7 +87,7 @@ export default class MarketplaceScreen extends React.Component {
     } else {
       if (this.state.selectedIndex === 0 && this.state.bidsLoading === false) {
         this.setState({bidsLoading: true});
-        firebase.database().ref('bids/' + 'SVT').once('value', (snapshot) => {
+        firebase.database().ref('bids').once('value', (snapshot) => {
           const res = snapshot.val();
           // console.log(res);
           if (res !== null) {
@@ -103,7 +103,7 @@ export default class MarketplaceScreen extends React.Component {
       }
       if (this.state.selectedIndex === 1 && this.state.asksLoading === false) {
         this.setState({asksLoading: true});
-        firebase.database().ref('asks/' + 'SVT').once('value', (snapshot) => {
+        firebase.database().ref('asks').once('value', (snapshot) => {
           const res = snapshot.val();
           // console.log(res);
           if (res !== null) {

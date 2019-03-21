@@ -23,30 +23,24 @@ export default class VNDAddScreen extends React.Component {
     this.setState({loading:true});
     const item = this.props.navigation.state.params.item;
     const user = firebase.auth().currentUser;
-    const accountRef = firebase.database().ref('account/' + user.uid);
-    const totalAmount = Number(item.amount) + Number(this.state.amount);
-    accountRef.child(item.kind).child(item.name).set(totalAmount)
-      .then((result) => {
-        // const activityRef = firebase.database().ref('activity/' + user.uid);
-        const activityRef = firebase.database().ref('/queue');
-        activityRef.push({
-          user: user.uid,
-          kind: item.kind,
-          currency: item.name,
-          action: 'add',
-          amount: Number(this.state.amount),
-          status: 'pending',
-          created: Date.now(),
-        });
-        this.setState({loading:false});
-        this.props.navigation.navigate('Unauth'); // force navigation route clean up. a bit hack.
-      })
-      .catch((error) => {
-        this.setState({loading:false});
-        // Handle Errors here.
-        alert(error.message);
-        console.log('onrejected', error);
-      });
+    const activityRef = firebase.database().ref('/queue');
+    activityRef.push({
+      user: user.uid,
+      kind: item.kind,
+      currency: item.name,
+      action: 'add',
+      amount: Number(this.state.amount),
+      status: 'pending',
+      created: Date.now(),
+    }).then(() => {
+      this.setState({loading:false});
+      this.props.navigation.navigate('Unauth'); // force navigation route clean up. a bit hack.
+    }).catch((error) => {
+      this.setState({loading:false});
+      // Handle Errors here.
+      alert(error.message);
+      console.log('onrejected', error);
+    });
   };
 
 
